@@ -1,0 +1,90 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #ebebeb;
+  margin: 0;
+}
+
+.tweet {
+  border: 1px solid #e1e8ed;
+  border-radius: 5px;
+  position: relative;
+  padding: 20px;
+  background-color: #fff;
+  width: 400px;
+  cursor: pointer;
+  transition: border-color 0.1s;
+}
+.tweet:hover {
+  border-color: #ccd6dd;
+}
+.tweet .tweet-head {
+  display: flex;
+  line-height: 1.2;
+}
+.tweet .tweet-head .tweet-image {
+  display: flex;
+  align-items: center;
+  margin-right: 9px;
+}
+.tweet .tweet-head .tweet-image img {
+  border-radius: 999px;
+  height: 38px;
+  width: 38px;
+}
+.tweet .tweet-head .tweet-author {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tweet .tweet-head .tweet-author:hover .name {
+  color: #3b94d9;
+}
+.tweet .tweet-head .tweet-author .name {
+  font-weight: 800;
+  transition: color 0.1s;
+}
+.tweet .tweet-head .tweet-author .handle {
+  color: #697882;
+  font-size: 0.875rem;
+}
+.tweet .tweet-footer .icons .fas {
+  color: #697882;
+  margin-right: 1rem;
+  transition: color 0.1s;
+}
+.tweet .tweet-footer .icons .fas .icon-number {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+}
+.tweet .tweet-footer .icons .fa-reply:hover {
+  color: #3b94d9;
+}
+.tweet .tweet-footer .icons .fa-retweet:hover {
+  color: #3da50d;
+}
+.tweet .tweet-footer .icons .fa-heart:hover {
+  color: #E0245E;
+}
+
+@keyframes refresh {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
