@@ -12,12 +12,13 @@ const App = () => {
 		API.getMe().then(setMe)
 	}, [])
 
+
   return (
 		<div className="App">
 			<header>
-				<div className="logo">wedebate</div>	
+				<div className="logo">moot.to</div>	
 				<div id="signin">
-					{/* me ? me.screen_name : <a href="http://127.0.0.1:8080/sessions/connect"> giriş yap</a> */}
+					{ me && me.screen_name ? <span>{me.screen_name} ― <span style={{cursor: "pointer"}} onClick={API.logout}>çıkış yap</span></span> : <a href="http://127.0.0.1:8080/sessions/connect">giriş yap</a>  }
 				</div>
 			</header>
 
