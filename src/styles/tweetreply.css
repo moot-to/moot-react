@@ -1,0 +1,43 @@
+.form .because{
+	color: #11ff33;
+}
+
+.form .but{
+	color: #ff1133;
+}
+
+.form .however{
+	color: #3381ff;
+}
+
+.form label{
+	margin-left: 5px;
+}
+
+.form i{
+	color: #555;
+	font-weight: 300;
+}
+
+textarea{
+	font-size: 15px;
+	outline: none;
+	width: 100% !important;
+	height: 100px !important;
+	margin-top: 15px;
+	border-radius: 15px;
+	border: 1px solid #ccc;
+	resize: none;
+	padding: 8px;
+	line-height: 1.5;
+}
+
+button{
+	border: 0px;
+	background-color: #2178ff;
+	margin-top: 5px;
+	border-radius: 10px;
+	color: #fff;
+	width: 100%;
+	height: 40px;
+}

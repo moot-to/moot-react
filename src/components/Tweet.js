@@ -1,8 +1,9 @@
 import React from 'react';
 import '../styles/tweet.css';
 import ContentLoader from 'react-content-loader'
+import { Link } from 'react-router-dom'
 
-const Tweet = ({loading, status}) => {
+const Tweet = ({reply, loading, status}) => {
 	if(loading){
 		return <ContentLoader speed={1} width={208} height={100}
 			viewBox="0 0 400 200" backgroundColor="#ffffff" foregroundColor="#e6e6e6"
@@ -18,7 +19,11 @@ const Tweet = ({loading, status}) => {
 			<rect x="0" y="55" rx="3" ry="3" width="380" height="6" />
 		</ContentLoader>
 	}
-	console.log(status)
+	if(status.error){
+		return <div className="tweet">
+			Deleted.
+		</div>
+	}
 	return <div className="tweet">
 		<div className="tweet-head">
 			<div className="tweet-image">
@@ -34,8 +39,8 @@ const Tweet = ({loading, status}) => {
 		</div>
 		<div className="tweet-footer">
 			 <div className="icons">
-				 <i className="fas fa-reply"></i>
-				 <i className="fas fa-retweet"></i>
+				 <i className="fas fa-reply" onClick={reply}></i>
+				 <Link to={`/${status.id_str}`}><i className="fas fa-retweet"></i></Link>
 				 <i className="fas fa-heart"></i>
 			 </div>
 		</div>
