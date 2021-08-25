@@ -1,3 +1,8 @@
+body{
+	margin: 0px;
+	padding: 0px;
+}
+
 .App {
 	width: 1900px;
 	height: 980px;
@@ -5,14 +10,14 @@
 
 header{
 	height: 30px;
-	background-color: red;
-	padding: 5px;
+	background-color: #ccc;
+	padding: 0px 15px;
 }
 
 header .logo{
 	float: left;
 }
 
-header #sigin{
+header #signin{
 	float: right;
 }

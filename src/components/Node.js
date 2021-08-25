@@ -15,13 +15,23 @@ const Node = (param) => {
 	const [loading, setLoading] = useState(true)
 	const [visibleReplyForm, setVisibleReplyForm] = useState(false);
 
+	const refetchStatus = () => {
+		API.getStatus(param.data.id).then(setStatus).then(() => setLoading(false))
+	}
+
+	const likeTweet = () => {
+		API.likeTweet(param.data.id).then(res => {
+			refetchStatus();
+		})
+	}
+
 	useEffect(() => {
 			API.getStatus(param.data.id).then(setStatus).then(() => setLoading(false))
 	}, [])
 
   return <div style={customNodeStyles}>
 			<Handle type="source" position="bottom" style={{ background: '#555' }} isConnectable={true} />
-			<Tweet reply={() => setVisibleReplyForm(!visibleReplyForm)} loading={loading} status={status} />
+			<Tweet like={likeTweet} reply={() => setVisibleReplyForm(!visibleReplyForm)} loading={loading} status={status} />
 			{visibleReplyForm && <TweetReply screen_name={status && status.user.screen_name} to={param.data.id} /> }
 			<Handle type="target" position="top" style={{ background: '#555' }} isConnectable={true} />
     </div>
