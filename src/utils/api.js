@@ -1,8 +1,8 @@
 const fetch = require('node-fetch');
 
-const BASE_URL = process.env.NODE_ENV !== "production"
+const BASE_URL = process.env.NODE_ENV === "production"
 	? "https://api.moot.to"
-	: "https://api.moot.to";
+	: "http://127.0.0.1:8080";
 
 const getMe = () => {
 	return fetch(`${BASE_URL}/me`, { credentials: 'include' })
