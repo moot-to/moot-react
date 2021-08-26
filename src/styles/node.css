@@ -20,11 +20,24 @@
 	padding: 3px 10px;
 }
 span.node-type-text.node-type-0{
-	background-color: #11ff33;
+	background-color: #63B233;
 }
 span.node-type-text.node-type-1{
-	background-color: #ff1133;
+	background-color: #e80f0c;
 }
 span.node-type-text.node-type-2{
-	background-color: #3381ff;
+	background-color: #2f7af4;
+}
+.loading-spinner{ 
+	color: #333;
+	animation: loading-spin 1.2s linear infinite;
+}				  
+
+@keyframes loading-spin{
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }

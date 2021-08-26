@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './styles/App.css'
+import { ReactFlowProvider } from 'react-flow-renderer';
 
 import API from './utils/api'
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -24,7 +25,11 @@ const App = () => {
 
 			<BrowserRouter>
 				<Route exact path="/"> <Home /> </Route>	
-				<Route path="/:id"> <Debate /> </Route>	
+				<Route path="/:id">
+					<ReactFlowProvider>
+						<Debate />
+					</ReactFlowProvider>
+				</Route>	
 			</BrowserRouter>	
 		</div>
   );

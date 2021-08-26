@@ -9,7 +9,7 @@ const TweetReply = (props) => {
 	const types = [
 		{value: "0", text: "çünkü", id: 'value-0', desc: "desteklemek için"},
 		{value: "1", text: "ama", id: 'value-1', desc: "karşı argüman sunmak için"},
-		{value: "2", text: "ancak", id: 'value-2', desc: "ek bilgi sağlamak için"}
+		{value: "2", text: "ayrıca", id: 'value-2', desc: "ek bilgi sağlamak için"}
 	]
 
 	const change = ({target: {value}}) => {

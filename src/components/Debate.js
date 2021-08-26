@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import ReactFlow, { removeElements, addEdge, MiniMap, Controls, Background, isNode } from 'react-flow-renderer';
+import ReactFlow, {
+	removeElements, addEdge, MiniMap, Controls,
+	Background, isNode, useStore, useZoomPanHelper, ControlButton
+} from 'react-flow-renderer';
 
 import Node from './Node';
 import API from '../utils/api';
@@ -32,6 +35,24 @@ const Debate = (props) => {
 	const {id} = useParams();
   const [tree, setTree] = useState([]);
 
+	if(document.querySelector('.react-flow__renderer')){
+		document.querySelector('.react-flow__renderer').style.visibility = "hidden";
+	}
+
+  const store = useStore();
+	const { zoomIn, zoomOut, setCenter  } = useZoomPanHelper();
+
+	const focusNode = () => {
+		const { nodes } = store.getState();
+		if (nodes.length) {
+			const node = nodes[0];
+			const x = node.__rf.position.x + node.__rf.width / 2;
+			const y = node.__rf.position.y + (node.__rf.height / 2) + 200;
+			const zoom = 1;
+			setCenter(x, y, zoom);
+		}
+	};
+
 	const fetchTrees = () => {
 		API.getTree(id).then(trees => {
 			const _tree = trees.map(tree => ({ id: tree.statusId, type: "tweet", data: { id: tree.statusId, type: tree.type, refetch: fetchTrees }, position: { x: 0, y: 0 } }));
@@ -41,12 +62,18 @@ const Debate = (props) => {
 			const branches = [..._tree, ..._links]
 
 			Promise.all(branches.filter(isNode).map(branch => waitForElement(branch)))
-				.then(res => { setTree(getLayoutedElements(branches)) })
-
+				.then(res => { setTree(getLayoutedElements(branches)); })
 			setTree(branches)
 		})
 	}
 	useEffect(fetchTrees, [id])
+	useEffect(() => {
+		focusNode();
+		setTimeout(() => {
+			document.querySelector('.react-flow__renderer').style.visibility = "visible";
+			document.querySelector('.loading-control').style.display = "none"
+		}, 2000)
+	}, [tree])
 
 	const position = { x: 0, y: 0 }
   const onElementsRemove = (elementsToRemove) => setTree((els) => removeElements(elementsToRemove, els));
@@ -63,7 +90,11 @@ const Debate = (props) => {
 			onLoad={onLoad}
 			nodeTypes={nodeTypes}>
 			<MiniMap />
-			<Controls />
+			<Controls showInteractive={false}>
+				<ControlButton className="loading-control">
+					<i className="fas fa-spinner loading-spinner"></i>
+				</ControlButton>
+			</Controls>
 			<Background />
 		</ReactFlow>
 }
@@ -75,7 +106,7 @@ const getLayoutedElements = (elements, direction = 'TB') => {
   elements.forEach((el) => {
     if (isNode(el)) {
 			var status = document.querySelector(`div[data-id="${el.id}"]`);
-      dagreGraph.setNode(el.id, { width: status.clientWidth + 50, height: status.clientHeight + 50 });
+      dagreGraph.setNode(el.id, { width: status.clientWidth + 50, height: status.clientHeight + 100 });
     } else {
       dagreGraph.setEdge(el.source, el.target);
     }

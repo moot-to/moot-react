@@ -15,16 +15,16 @@ body {
   margin: 0;
 }
 .tweet-container.tweet-type-0{
-	border-top: 4px solid #11ff33;
-	border-radius: 16px;
+	border: 4px solid #63B233;
+	border-radius: 15px;
 }
 .tweet-container.tweet-type-1{
-	border-top: 4px solid #ff1133;
-	border-radius: 16px;
+	border: 4px solid #E80F0C;
+	border-radius: 15px;
 }
 .tweet-container.tweet-type-2{
-	border-top: 4px solid #3381ff;
-	border-radius: 16px;
+	border: 4px solid #2f7af4;
+	border-radius: 15px;
 }
 .tweet {
   border: 1px solid #e1e8ed;
@@ -111,13 +111,13 @@ a{
   font-size: 0.8rem;
   font-weight: 600;
 }
-.tweet .tweet-footer .icons .fa-reply:hover {
+.tweet .tweet-footer .icons .reply:hover i{
   color: #3b94d9;
 }
-.tweet .tweet-footer .icons .fa-retweet:hover {
+.tweet .tweet-footer .icons .retweet:hover i{
   color: #3da50d;
 }
-.tweet .tweet-footer .icons .fa-heart:hover {
+.tweet .tweet-footer .icons .like:hover i{
   color: #E0245E;
 }
 .tweet .tweet-footer .timestamp{

@@ -27,16 +27,16 @@ const Node = (param) => {
 	const types = [
 		{value: "0", text: "çünkü", id: 'value-0', desc: "desteklemek için"},
 		{value: "1", text: "ama", id: 'value-1', desc: "karşı argüman sunmak için"},
-		{value: "2", text: "ancak", id: 'value-2', desc: "ek bilgi sağlamak için"}
+		{value: "2", text: "ayrıca", id: 'value-2', desc: "ek bilgi sağlamak için"}
 	]
 
   return <div className={`node`}>
 			<div className="node-label">{param.data && param.data.type &&
 			<span className={`node-type-text node-type-${param.data.type || "n"}`}>{types.find(type => type.value === param.data.type).text}</span>}</div>
-			{param.data.type !== null && <Handle type="target" position="top" style={{ background: '#555' }} isConnectable={true} />}
-			<Tweet className={`tweet-type-${param.data.type || "n"}`} like={likeTweet} reply={() => setVisibleReplyForm(!visibleReplyForm)} loading={loading} status={status} />
+			{param.data.type !== null && <Handle type="target" position="top" style={{ background: '#555', visibility: 'hidden' }} isConnectable={true} />}
+			<Tweet className={`tweet-type-${param.data.type || "n"}`} like={(e) => {e.preventDefault(); likeTweet()}} reply={(e) => {e.preventDefault(); setVisibleReplyForm(!visibleReplyForm)}} loading={loading} status={status} />
 			{visibleReplyForm && <TweetReply refetch={() => {param.data.refetch(); setVisibleReplyForm(false) }} screen_name={status && status.user.screen_name} to={param.data.id} /> }
-			<Handle type="source" position="bottom" style={{ background: '#555' }} isConnectable={true} />
+			<Handle type="source" position="bottom" style={{ background: '#555', visibility: 'hidden' }} isConnectable={true} />
     </div>
 }
 
