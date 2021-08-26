@@ -30,7 +30,7 @@ const Node = (param) => {
 		{value: "2", text: "ayrıca", id: 'value-2', desc: "ek bilgi sağlamak için"}
 	]
 
-  return <div className={`node`}>
+  return <div className={`node node-type-${param.data.type || "n"}`}>
 			<div className="node-label">{param.data && param.data.type &&
 			<span className={`node-type-text node-type-${param.data.type || "n"}`}>{types.find(type => type.value === param.data.type).text}</span>}</div>
 			{param.data.type !== null && <Handle type="target" position="top" style={{ background: '#555', visibility: 'hidden' }} isConnectable={true} />}

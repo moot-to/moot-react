@@ -32,10 +32,17 @@ body {
 	border-radius: 10px;
   padding: 20px;
   background-color: #fff;
-  width: 400px;
   cursor: pointer;
   transition: border-color 0.1s;
+	width: 400px;
 }
+.tweet-reply{
+  width: 408px;
+}
+.node-type-n .tweet-reply{
+  width: 400px;
+}
+
 .tweet:hover {
   border-color: #ccd6dd;
 }

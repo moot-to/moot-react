@@ -21,12 +21,12 @@ const TweetReply = (props) => {
 	const links = text.match(url_match_regex);
 	const text_length = links && links.length ? text.replace(url_match_regex, "").length + (links.length * 23 ) : text.length;
 
-	return <div className="tweet">
+	return <div className="tweet tweet-reply">
 		<div className="form">
-			{ types.map(type => (<>
+			{ types.map(type => (<div key={type}>
 				<input checked={_type === type.value} type="radio" id={type.id} name="type" value={type.value} onChange={change} />
 				<label htmlFor={type.id}><span className={type.id}>{type.text}</span> ― <i>{type.desc}</i></label><br />
-			</>)) }
+			</div>)) }
 
 			<textarea style={text_length > 240 ? {border: "2px solid #E80F0C"} : {}} disabled={!Boolean(_type)} value={text} onChange={({target: {value}}) => setText(value) }></textarea>
 			<div className="buttons">

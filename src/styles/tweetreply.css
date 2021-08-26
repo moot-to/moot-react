@@ -24,12 +24,12 @@ textarea{
 	outline: none;
 	width: 100% !important;
 	height: 180px !important;
-	margin-top: 15px;
+	margin-top: 15px !important;
 	border-radius: 15px;
 	border: 1px solid #ccc;
 	resize: none;
 	padding: 8px;
-	line-height: 1.5;
+	line-height: 1.2 !important;
 	overflow: hidden;
 }
 button.send-button{
@@ -52,6 +52,6 @@ button.send-button:disabled{
 	height: 40px;
 }
 .char-limit{
-	font-size: 12px;
+	font-size: 18px;
 	font-weight: 500;
 }

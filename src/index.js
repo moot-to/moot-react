@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'react-flow-renderer/dist/style.css';
+import 'normalize.css';
 
 ReactDOM.render(
   <React.StrictMode>
