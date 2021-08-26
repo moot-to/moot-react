@@ -29,7 +29,7 @@ const Tweet = ({like, reply, loading, status, className}) => {
 	
 	const mentioned_usernames = status && status.text ? status.text.match(/@[a-zA-Z0-9]*/g) : []
 	return <div className={`tweet-container ${className}`}>
-		<a href={`https://twitter.com/${status.user.screen_name}/${status.id_str}`} target="_blank">
+		<a href={`https://twitter.com/${status.user.screen_name}/status/${status.id_str}`} target="_blank">
 			<div className="tweet">
 				<div className="tweet-head">
 					<div className="tweet-image">
@@ -62,7 +62,7 @@ const Tweet = ({like, reply, loading, status, className}) => {
 						 </span>
 					 </div>
 					 <div className="timestamp">
-							<a href={`https://twitter.com/${status.user.screen_name}/${status.id_str}`} target="_blank">
+							<a href={`https://twitter.com/${status.user.screen_name}/status/${status.id_str}`} target="_blank">
 								<span>{new Date(status.created_at).toLocaleString()}</span>
 							</a>
 					 </div>
