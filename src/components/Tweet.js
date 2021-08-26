@@ -22,7 +22,7 @@ const Tweet = ({like, reply, loading, status, className}) => {
 	if(status.error){
 		return <div className={`tweet-container ${className}`}>
 			<div className="tweet">
-				<i>Deleted by user.</i>
+				<i>deleted by user.</i>
 			</div>
 		</div>
 	}

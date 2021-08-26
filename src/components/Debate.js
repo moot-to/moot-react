@@ -122,7 +122,7 @@ const getLayoutedElements = (elements, direction = 'TB') => {
 			var status = document.querySelector(`div[data-id="${el.id}"]`);
       el.position = {
         x: nodeWithPosition.x - status.clientWidth / 2,
-        y: nodeWithPosition.y - status.clientHeight / 2,
+        y: nodeWithPosition.y,
       };
     }
 
