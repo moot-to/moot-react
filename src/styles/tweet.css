@@ -106,9 +106,9 @@ a{
 .tweet .tweet-footer .icons .like-count {
 	font-weight: 500; 
 }
-.tweet .tweet-footer .icons .fas .icon-number {
+.tweet .tweet-footer .icons .fas .like-count {
   font-family: "Roboto", sans-serif;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 .tweet .tweet-footer .icons .reply:hover i{
