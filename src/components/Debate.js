@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ReactFlow, {
-  removeElements, addEdge,
-  MiniMap, Controls, Background, isNode
-} from 'react-flow-renderer';
+import ReactFlow, { removeElements, addEdge, MiniMap, Controls, Background, isNode } from 'react-flow-renderer';
 
 import Node from './Node';
 import API from '../utils/api';
@@ -12,31 +9,10 @@ import dagre from 'dagre';
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-const nodeWidth = 172;
-const nodeHeight = 36;
-
 const edgeStyles = {
-	'0': {
-		type: 'smoothstep', label: "çünkü",
-		labelBgPadding: [8, 4], labelBgBorderRadius: 4,
-		labelStyle: { fill: "#fff", fontSize: "15px"  },
-		labelBgStyle: { fill: "#11ff33", fillOpacity: 0.9 },
-		style: { stroke: '#11ff33', strokeWidth: 3  }
-	},
-	'1': {
-		type: 'smoothstep', label: "ama",
-		labelBgPadding: [8, 4], labelBgBorderRadius: 4,
-		labelStyle: { fill: "#fff", fontSize: "15px"  },
-		labelBgStyle: { fill: "#ff1133", fillOpacity: 0.9 },
-		style: { stroke: '#ff1133', strokeWidth: 3  }
-	},
-	'2': {
-		type: 'smoothstep', label: "ancak",
-		labelBgPadding: [8, 4], labelBgBorderRadius: 4,
-		labelStyle: { fill: "#fff", fontSize: "15px"  },
-		labelBgStyle: { fill: "#3381ff", fillOpacity: 0.9 },
-		style: { stroke: '#3381ff', strokeWidth: 3  }
-	},
+	'0': { type: 'step', style: { stroke: '#777', strokeWidth: 3 } },
+	'1': { type: 'step', style: { stroke: '#777', strokeWidth: 3 } },
+	'2': { type: 'step', style: { stroke: '#777', strokeWidth: 3 } },
 }
 
 const onLoad = (reactFlowInstance) => {
@@ -56,9 +32,9 @@ const Debate = (props) => {
 	const {id} = useParams();
   const [tree, setTree] = useState([]);
 
-	useEffect(() => {
+	const fetchTrees = () => {
 		API.getTree(id).then(trees => {
-			const _tree = trees.map(tree => ({ id: tree.statusId, type: "tweet", data: { id: tree.statusId }, position: { x: 200, y: 200 }, }));
+			const _tree = trees.map(tree => ({ id: tree.statusId, type: "tweet", data: { id: tree.statusId, type: tree.type, refetch: fetchTrees }, position: { x: 0, y: 0 } }));
 			const _links = trees.filter(t => t.repliedTo)
 				.map(t => ({ id: `e${t.repliedTo}-${t.statusId}`, target: t.statusId, source: t.repliedTo, ...edgeStyles[t.type] }))
 
@@ -69,25 +45,27 @@ const Debate = (props) => {
 
 			setTree(branches)
 		})
-	}, [id])
+	}
+	useEffect(fetchTrees, [id])
 
 	const position = { x: 0, y: 0 }
   const onElementsRemove = (elementsToRemove) => setTree((els) => removeElements(elementsToRemove, els));
   const onConnect = (params) => setTree((els) => addEdge(params, els));
 
 	const nodeTypes = {
-		tweet: Node,
+		tweet: Node
 	};
 
 	return <ReactFlow
-		elements={tree}
-		onConnect={onConnect}
-		onLoad={onLoad}
-		nodeTypes={nodeTypes} >
-		<MiniMap />
-		<Controls />
-		<Background />
-	</ReactFlow>
+			nodesDraggable={false}
+			elements={tree}
+			onConnect={onConnect}
+			onLoad={onLoad}
+			nodeTypes={nodeTypes}>
+			<MiniMap />
+			<Controls />
+			<Background />
+		</ReactFlow>
 }
 
 const getLayoutedElements = (elements, direction = 'TB') => {
@@ -96,7 +74,6 @@ const getLayoutedElements = (elements, direction = 'TB') => {
 
   elements.forEach((el) => {
     if (isNode(el)) {
-			console.log(el.id)
 			var status = document.querySelector(`div[data-id="${el.id}"]`);
       dagreGraph.setNode(el.id, { width: status.clientWidth + 50, height: status.clientHeight + 50 });
     } else {
@@ -121,5 +98,4 @@ const getLayoutedElements = (elements, direction = 'TB') => {
     return el;
   });
 };
-
 export default Debate;

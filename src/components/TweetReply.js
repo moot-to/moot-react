@@ -31,7 +31,7 @@ const TweetReply = (props) => {
 					return alert('argüman tipi seçmelisin');
 				}
 				API.sendTweet({text: `@${props.screen_name} ${text}`, type: _type, to: props.to})
-					.then(() => window.location.reload())
+					.then(() => props.refetch())
 			}}>ekle</button>
 		</div>
 	</div>

@@ -1,0 +1,30 @@
+.node {
+	position: relative;
+}
+
+.node-label{
+	position: relative;
+	z-index: 50;
+	color: #fff;
+}
+
+.node .node-type-text{
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	position: absolute;
+	margin-left: auto; margin-right: auto;
+	top: -32px;
+	left: 0; right: 0;
+	text-align: center;
+	width: min-content;
+	padding: 3px 10px;
+}
+span.node-type-text.node-type-0{
+	background-color: #11ff33;
+}
+span.node-type-text.node-type-1{
+	background-color: #ff1133;
+}
+span.node-type-text.node-type-2{
+	background-color: #3381ff;
+}

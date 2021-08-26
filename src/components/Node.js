@@ -3,12 +3,7 @@ import API from '../utils/api'
 import { Handle } from 'react-flow-renderer';
 import Tweet from './Tweet'
 import TweetReply from './TweetReply'
-
-const customNodeStyles = {
-	minWidth: 208,
-	minHeight: 100,
-	backgroundColor: "#fff"
-};
+import '../styles/node.css';
 
 const Node = (param) => {
 	const [status, setStatus] = useState()
@@ -29,11 +24,19 @@ const Node = (param) => {
 			API.getStatus(param.data.id).then(setStatus).then(() => setLoading(false))
 	}, [])
 
-  return <div style={customNodeStyles}>
+	const types = [
+		{value: "0", text: "çünkü", id: 'value-0', desc: "desteklemek için"},
+		{value: "1", text: "ama", id: 'value-1', desc: "karşı argüman sunmak için"},
+		{value: "2", text: "ancak", id: 'value-2', desc: "ek bilgi sağlamak için"}
+	]
+
+  return <div className={`node`}>
+			<div className="node-label">{param.data && param.data.type &&
+			<span className={`node-type-text node-type-${param.data.type || "n"}`}>{types.find(type => type.value === param.data.type).text}</span>}</div>
+			{param.data.type !== null && <Handle type="target" position="top" style={{ background: '#555' }} isConnectable={true} />}
+			<Tweet className={`tweet-type-${param.data.type || "n"}`} like={likeTweet} reply={() => setVisibleReplyForm(!visibleReplyForm)} loading={loading} status={status} />
+			{visibleReplyForm && <TweetReply refetch={() => {param.data.refetch(); setVisibleReplyForm(false) }} screen_name={status && status.user.screen_name} to={param.data.id} /> }
 			<Handle type="source" position="bottom" style={{ background: '#555' }} isConnectable={true} />
-			<Tweet like={likeTweet} reply={() => setVisibleReplyForm(!visibleReplyForm)} loading={loading} status={status} />
-			{visibleReplyForm && <TweetReply screen_name={status && status.user.screen_name} to={param.data.id} /> }
-			<Handle type="target" position="top" style={{ background: '#555' }} isConnectable={true} />
     </div>
 }
 

@@ -1,11 +1,9 @@
 * {
   box-sizing: border-box;
 }
-
 html {
   font-size: 100%;
 }
-
 body {
   font-family: "Roboto", sans-serif;
   line-height: 1.4;
@@ -16,11 +14,25 @@ body {
   background-color: #ebebeb;
   margin: 0;
 }
-
+.tweet-container{
+	padding-top: 5px;
+}
+.tweet-container.tweet-type-0{
+	border-top: 4px solid #11ff33;
+	border-radius: 10px;
+}
+.tweet-container.tweet-type-1{
+	border-top: 4px solid #ff1133;
+	border-radius: 10px;
+}
+.tweet-container.tweet-type-2{
+	border-top: 4px solid #3381ff;
+	border-radius: 10px;
+}
 .tweet {
   border: 1px solid #e1e8ed;
-  border-radius: 5px;
   position: relative;
+	border-radius: 10px;
   padding: 20px;
   background-color: #fff;
   width: 400px;
@@ -78,6 +90,13 @@ a{
 	width: 25px;
 	height: 25px;
 	margin-left: auto;
+}
+.tweet-body .tweet-text-mention{
+	font-size: 15px;
+	color: #555;
+}
+.tweet-body .tweet-text-mention span{
+	color: rgb(29, 161, 242);
 }
 .tweet .tweet-footer{
 	display: flex;
