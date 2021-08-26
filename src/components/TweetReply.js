@@ -21,6 +21,12 @@ const TweetReply = (props) => {
 	const links = text.match(url_match_regex);
 	const text_length = links && links.length ? text.replace(url_match_regex, "").length + (links.length * 23 ) : text.length;
 
+	if(Boolean(props.me.error)){
+		return <div className="tweet tweet-reply">
+			Tweet göndermek için <a href={`${API.BASE_URL}/sessions/connect`} style={{color: "#2f7af4"}}>giriş</a> yapınız.
+		</div>
+	}
+
 	return <div className="tweet tweet-reply">
 		<div className="form">
 			{ types.map(type => (<div key={type}>

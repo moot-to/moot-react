@@ -6,13 +6,13 @@ import API from './utils/api'
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Home, Debate } from './components'
 
+const AccountContext = React.createContext(null);
 const App = () => {
 	const [me, setMe] = useState()
 
 	useEffect(() => {
 		API.getMe().then(setMe)
 	}, [])
-
 
   return (
 		<div className="App">
@@ -27,7 +27,9 @@ const App = () => {
 				<Route exact path="/"> <Home /> </Route>	
 				<Route path="/:id">
 					<ReactFlowProvider>
-						<Debate />
+						<AccountContext.Provider value={me}>
+							<Debate me={me} />
+						</AccountContext.Provider>
 					</ReactFlowProvider>
 				</Route>	
 			</BrowserRouter>	
@@ -35,4 +37,5 @@ const App = () => {
   );
 };
 
+export { AccountContext };
 export default App;
