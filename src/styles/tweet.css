@@ -34,13 +34,13 @@ body {
   background-color: #fff;
   cursor: pointer;
   transition: border-color 0.1s;
-	width: 400px;
+	width: 420px;
 }
 .tweet-reply{
-  width: 408px;
+  width: 428px;
 }
 .node-type-n .tweet-reply{
-  width: 400px;
+  width: 420px;
 }
 
 .tweet:hover {
@@ -95,6 +95,11 @@ a{
 	height: 25px;
 	margin-left: auto;
 }
+
+.tweet-body .tweet-text{
+	font-size: 22px;
+	color: #555;
+}
 .tweet-body .tweet-text-mention{
 	font-size: 15px;
 	color: #555;
@@ -115,7 +120,8 @@ a{
 }
 .tweet .tweet-footer .icons .fas .like-count {
   font-family: "Roboto", sans-serif;
-  font-size: 1rem;
+  font-size: 0.8rem;
+	line-height: 1rem;
   font-weight: 600;
 }
 
