@@ -118,6 +118,10 @@ a{
   font-size: 1rem;
   font-weight: 600;
 }
+
+.tweet .tweet-footer .icons .like i.favorited{
+  color: #E0245E;
+}
 .tweet .tweet-footer .icons .reply:hover i{
   color: #3b94d9;
 }

@@ -29,6 +29,11 @@ const likeTweet = (id) => {
 	return fetch(url, { credentials: 'include' }).then(res => res.json())
 }
 
+const dislikeTweet = (id) => {
+	const url = `${BASE_URL}/dislike/${id}`
+	return fetch(url, { credentials: 'include' }).then(res => res.json())
+}
+
 const logout = () => {
 	const url = `${BASE_URL}/logout`
 	return fetch(url, { credentials: 'include' })
@@ -43,5 +48,6 @@ export default {
 	getTree,
 	sendTweet,
 	likeTweet,
+	dislikeTweet,
 	logout
 };

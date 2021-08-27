@@ -3,7 +3,7 @@ import '../styles/tweet.css';
 import ContentLoader from 'react-content-loader'
 import { Link } from 'react-router-dom'
 
-const Tweet = ({like, reply, loading, status, className}) => {
+const Tweet = ({like, dislike, reply, loading, status, className}) => {
 	if(loading){
 		return <ContentLoader speed={1} width={208} height={100}
 			viewBox="0 0 400 200" backgroundColor="#ffffff" foregroundColor="#e6e6e6"
@@ -57,8 +57,8 @@ const Tweet = ({like, reply, loading, status, className}) => {
 					 	 <span className="reply" onClick={reply}>
 							 <i className="fas fa-reply"></i>
 						 </span>
-						 <span className="like" onClick={like}>
-							 <i className="fas fa-heart"> <span className="like-count">{status.favorite_count}</span></i>
+						 <span className="like" onClick={status.favorited ? dislike : like}>
+							 <i className={`fas fa-heart ${status.favorited ? 'favorited' : ""}`}> <span className="like-count">{status.favorite_count}</span></i>
 						 </span>
 					 </div>
 					 <div className="timestamp">

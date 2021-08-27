@@ -17,12 +17,22 @@ const Node = (param) => {
 
 	const likeTweet = () => {
 		API.likeTweet(param.data.id).then(res => {
-			refetchStatus();
+			if(res.id){
+				setStatus({...status, favorited: true, favorite_count: status.favorite_count + 1})
+			}
+		})
+	}
+
+	const dislikeTweet = () => {
+		API.dislikeTweet(param.data.id).then(res => {
+			if(res.id){
+				setStatus({...status, favorited: false, favorite_count: status.favorite_count - 1})
+			}
 		})
 	}
 
 	useEffect(() => {
-			API.getStatus(param.data.id).then(setStatus).then(() => setLoading(false))
+		API.getStatus(param.data.id).then(setStatus).then(() => setLoading(false))
 	}, [])
 
 	const types = [
@@ -36,7 +46,11 @@ const Node = (param) => {
 			<div className={`node node-type-${param.data.type || "n"}`}>
 				<div className="node-label">{param.data && param.data.type && <span className={`node-type-text node-type-${param.data.type || "n"}`}>{types.find(type => type.value === param.data.type).text}</span>}</div>
 				{param.data.type !== null && <Handle type="target" position="top" style={{ background: '#555', visibility: 'hidden' }} isConnectable={true} />}
-				<Tweet className={`tweet-type-${param.data.type || "n"}`} like={(e) => {e.preventDefault(); likeTweet()}} reply={(e) => {e.preventDefault(); setVisibleReplyForm(!visibleReplyForm)}} loading={loading} status={status} />
+				<Tweet className={`tweet-type-${param.data.type || "n"}`}
+					like={(e) => {e.preventDefault(); likeTweet()}}
+					dislike={(e) => {e.preventDefault(); dislikeTweet()}}
+					reply={(e) => {e.preventDefault(); setVisibleReplyForm(!visibleReplyForm)}}
+					loading={loading} status={status} />
 				{visibleReplyForm && <TweetReply me={me} refetch={() => {param.data.refetch(); setVisibleReplyForm(false) }} screen_name={status && status.user.screen_name} to={param.data.id} /> }
 				<Handle type="source" position="bottom" style={{ background: '#555', visibility: 'hidden' }} isConnectable={true} />
 			</div>))}
