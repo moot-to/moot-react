@@ -34,6 +34,11 @@ const dislikeTweet = (id) => {
 	return fetch(url, { credentials: 'include' }).then(res => res.json())
 }
 
+const randomMoot = (id) => {
+	const url = `${BASE_URL}/random`
+	return fetch(url, { credentials: 'include' }).then(res => res.json())
+}
+
 const logout = () => {
 	const url = `${BASE_URL}/logout`
 	return fetch(url, { credentials: 'include' })
@@ -49,5 +54,6 @@ export default {
 	sendTweet,
 	likeTweet,
 	dislikeTweet,
+	randomMoot,
 	logout
 };

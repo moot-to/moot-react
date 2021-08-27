@@ -11,6 +11,7 @@ body{
 }
 
 header{
+	display: flex;
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -18,14 +19,21 @@ header{
 	height: 40px;
 	line-height: 40px;
 	padding: 0px 15px;
-	background-color: rgba(210, 210, 210, 0.9);
+	background-color: rgba(210, 210, 210, 0.6);
 	z-index: 15;
 }
 
+.random{
+	flex: 1;
+	cursor: pointer;
+	text-align: center;
+}
+
 header .logo{
-	float: left;
+	flex: 1;
 }
 
 header #signin{
-	float: right;
+	flex: 1;
+	text-align: right;
 }
