@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import API from '../utils/api'
 import { AccountContext } from '../App';
 import { Handle } from 'react-flow-renderer';
@@ -10,6 +10,10 @@ const Node = (param) => {
 	const [status, setStatus] = useState()
 	const [loading, setLoading] = useState(true)
 	const [visibleReplyForm, setVisibleReplyForm] = useState(false);
+
+	const innerRef = useOuterClick(ev => {
+		if(visibleReplyForm === true) setVisibleReplyForm(false) 
+	});
 
 	const refetchStatus = () => {
 		API.getStatus(param.data.id).then(setStatus).then(() => setLoading(false))
@@ -43,7 +47,7 @@ const Node = (param) => {
 
   return <AccountContext.Consumer>
 		{((me) => (
-			<div className={`node node-type-${param.data.type || "n"}`}>
+			<div ref={innerRef} className={`node node-type-${param.data.type || "n"}`}>
 				<div className="node-label">{param.data && param.data.type && <span className={`node-type-text node-type-${param.data.type || "n"}`}>{types.find(type => type.value === param.data.type).text}</span>}</div>
 				{param.data.type !== null && <Handle type="target" position="top" style={{ background: '#555', visibility: 'hidden' }} isConnectable={true} />}
 				<Tweet className={`tweet-type-${param.data.type || "n"}`}
@@ -55,6 +59,23 @@ const Node = (param) => {
 				<Handle type="source" position="bottom" style={{ background: '#555', visibility: 'hidden' }} isConnectable={true} />
 			</div>))}
 	</AccountContext.Consumer>
+}
+
+function useOuterClick(callback) {
+	const callbackRef = useRef();
+	const innerRef = useRef();
+
+	useEffect(() => { callbackRef.current = callback;  });
+	useEffect(() => {
+		document.addEventListener("click", handleClick);
+		return () => document.removeEventListener("click", handleClick);
+		function handleClick(e) {
+		if (innerRef.current && callbackRef.current && 
+				!innerRef.current.contains(e.target)
+			 ) callbackRef.current(e);
+		}
+	}, []);
+	return innerRef;
 }
 
 export default Node;
