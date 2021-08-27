@@ -19,6 +19,7 @@ const Tweet = ({like, dislike, reply, loading, status, className}) => {
 			<rect x="0" y="55" rx="3" ry="3" width="380" height="6" />
 		</ContentLoader>
 	}
+
 	if(status.error){
 		return <div className={`tweet-container ${className}`}>
 			<div className="tweet">
@@ -26,8 +27,12 @@ const Tweet = ({like, dislike, reply, loading, status, className}) => {
 			</div>
 		</div>
 	}
+
+	const username_regex = /@[a-zA-Z0-9]*/g;
+	const hashtag_regex = /#([a-zöçişğüÖÇŞÜĞA-Z0-9]*)/g;
 	
-	const mentioned_usernames = status && status.text ? status.text.match(/@[a-zA-Z0-9]*/g) : []
+	const mentioned_usernames = status && status.text ? status.text.match(username_regex) : []
+
 	return <div className={`tweet-container ${className}`}>
 		<a href={`https://twitter.com/${status.user.screen_name}/status/${status.id_str}`} target="_blank">
 			<div className="tweet">
@@ -50,7 +55,7 @@ const Tweet = ({like, dislike, reply, loading, status, className}) => {
 				</div>
 				<div className="tweet-body">
 					<p className="tweet-text-mention">{mentioned_usernames && <div>Replying to <span>{mentioned_usernames.join("")}</span></div>}</p>
-					<p className="tweet-text">{status.text.replace(/@[a-zA-Z0-9]*/g, "")}</p>
+					<p className="tweet-text" dangerouslySetInnerHTML={{__html: status.text.replace(username_regex, "").trimStart().replace(hashtag_regex, '<a class="hashtag" href="https://twitter.com/hashtag/$1" target="_blank">#$1</a>')}}></p>
 				</div>
 				<div className="tweet-footer">
 					 <div className="icons">

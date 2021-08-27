@@ -20,7 +20,7 @@ const getTree = (id) => {
 }
 
 const sendTweet = (params) => {
-	const url = `${BASE_URL}/tweet?status=${params.text}&repliedTo=${params.to}&type=${params.type}`
+	const url = `${BASE_URL}/tweet?status=${btoa(unescape(encodeURIComponent(params.text)))}&repliedTo=${params.to}&type=${params.type}`
 	return fetch(url, { credentials: 'include' }).then(res => res.json())
 }
 

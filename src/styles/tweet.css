@@ -95,10 +95,16 @@ a{
 	height: 25px;
 	margin-left: auto;
 }
-
 .tweet-body .tweet-text{
 	font-size: 22px;
 	color: #555;
+	white-space: break-spaces;
+}
+.tweet-body .tweet-text .hashtag{
+	color: rgb(29, 161, 242);
+}
+.tweet-body .tweet-text .hashtag:hover{
+	text-decoration: underline;
 }
 .tweet-body .tweet-text-mention{
 	font-size: 15px;

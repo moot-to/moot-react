@@ -29,7 +29,7 @@ const TweetReply = (props) => {
 
 	return <div className="tweet tweet-reply">
 		<div className="form">
-			{ types.map(type => (<div key={type}>
+			{ types.map(type => (<div key={type.value}>
 				<input checked={_type === type.value} type="radio" id={type.id} name="type" value={type.value} onChange={change} />
 				<label htmlFor={type.id}><span className={type.id}>{type.text}</span> ― <i>{type.desc}</i></label><br />
 			</div>)) }
