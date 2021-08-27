@@ -106,7 +106,7 @@ const getLayoutedElements = (elements, direction = 'TB') => {
   elements.forEach((el) => {
     if (isNode(el)) {
 			var status = document.querySelector(`div[data-id="${el.id}"]`);
-      dagreGraph.setNode(el.id, { width: status.clientWidth + 50, height: status.clientHeight + 125 });
+      dagreGraph.setNode(el.id, { width: status.clientWidth + 50, height: (status.clientHeight < 100 ? 50 : status.clientHeight) + 125 });
     } else {
       dagreGraph.setEdge(el.source, el.target);
     }
