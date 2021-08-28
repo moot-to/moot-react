@@ -62,6 +62,11 @@ const Tweet = ({like, dislike, reply, loading, status, className}) => {
 					 	 <span className="reply" onClick={reply}>
 							 <i className="fas fa-reply"></i>
 						 </span>
+						 <a href={`https://twitter.com/intent/retweet?tweet_id=${status.id_str}`}>
+							 <span className="retweet">
+								 <i className="fas fa-retweet"></i>
+							 </span>
+						 </a>
 						 <span className="like" onClick={status.favorited ? dislike : like}>
 							 <i className={`fas fa-heart ${status.favorited ? 'favorited' : ""}`}> <span className="like-count">{status.favorite_count}</span></i>
 						 </span>

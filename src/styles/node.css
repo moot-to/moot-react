@@ -28,6 +28,9 @@ span.node-type-text.node-type-1{
 span.node-type-text.node-type-2{
 	background-color: #2f7af4;
 }
+span.node-type-text.node-type-3{
+	background-color: #e88300;
+}
 .loading-spinner{ 
 	color: #333;
 	animation: loading-spin 1.2s linear infinite;
@@ -40,4 +43,25 @@ span.node-type-text.node-type-2{
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+.fallacy-statuses .fallacy-status{
+	display: flex;
+	justify-content: space-between;
+	background-color: #e88300;
+	position: relative;
+	padding: 5px 20px;
+	color: #fff;
+	border-top: 0.5px solid #ffb24c;
+}
+.fallacy-statuses .fallacy-status:last-child{
+	border-radius: 0px 0px 10px 10px;
+}
+.fallacy-statuses .fallacy-status span{
+	display: flex;
+	color: #fff;
+}
+.fallacy-status:hover{
+	text-decoration: underline;
+	cursor: pointer;
 }

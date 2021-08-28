@@ -16,6 +16,7 @@ const edgeStyles = {
 	'0': { type: 'step', style: { stroke: '#777', strokeWidth: 3 } },
 	'1': { type: 'step', style: { stroke: '#777', strokeWidth: 3 } },
 	'2': { type: 'step', style: { stroke: '#777', strokeWidth: 3 } },
+	'3': { type: 'step', style: { stroke: '#777', strokeWidth: 3 } },
 }
 
 const onLoad = (reactFlowInstance) => {
@@ -40,12 +41,12 @@ const Debate = (props) => {
 	}
 
   const store = useStore();
-	const { zoomIn, zoomOut, setCenter  } = useZoomPanHelper();
+	const { zoomIn, zoomOut, setCenter } = useZoomPanHelper();
 
 	const focusNode = () => {
 		const { nodes } = store.getState();
 		if (nodes.length) {
-			const node = nodes[0];
+			const node = id ? nodes.find(node => node.id === id) : nodes[0];
 			const x = node.__rf.position.x + node.__rf.width / 2;
 			const y = node.__rf.position.y + (node.__rf.height / 2) + 200;
 			const zoom = 1;
@@ -55,17 +56,27 @@ const Debate = (props) => {
 
 	const fetchTrees = () => {
 		API.getTree(id).then(trees => {
-			const _tree = trees.map(tree => ({ id: tree.statusId, type: "tweet", data: { id: tree.statusId, type: tree.type, refetch: fetchTrees }, position: { x: 0, y: 0 } }));
+			const _tree = trees.map(tree => ({
+				id: tree.statusId, type: "tweet",
+				data: {...tree, id: tree.statusId, refetch: fetchTrees, focusNode },
+				position: { x: 0, y: 0 }
+			}));
+
 			const _links = trees.filter(t => t.repliedTo)
-				.map(t => ({ id: `e${t.repliedTo}-${t.statusId}`, target: t.statusId, source: t.repliedTo, ...edgeStyles[t.type] }))
+				.map(t => ({
+					id: `e${t.repliedTo}-${t.statusId}`,
+					target: t.statusId,
+					source: t.repliedTo,
+					...edgeStyles[t.type]
+				}));
 
 			const branches = [..._tree, ..._links]
-
 			Promise.all(branches.filter(isNode).map(branch => waitForElement(branch)))
 				.then(res => { setTree(getLayoutedElements(branches)); })
 			setTree(branches)
 		})
 	}
+
 	useEffect(fetchTrees, [id])
 	useEffect(() => {
 		focusNode();

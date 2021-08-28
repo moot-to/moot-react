@@ -9,9 +9,11 @@ import { Home, Debate } from './components'
 const AccountContext = React.createContext(null);
 const App = () => {
 	const [me, setMe] = useState()
+	const [fallacies, setFallacies] = useState()
 
 	useEffect(() => {
-		API.getMe().then(setMe)
+		API.getMe().then(setMe);
+		API.getFallacies().then(setFallacies);
 	}, [])
 
 	const getRandom = () => {
@@ -34,7 +36,7 @@ const App = () => {
 				<Route exact path="/"> <Home /> </Route>	
 				<Route path="/:id">
 					<ReactFlowProvider>
-						<AccountContext.Provider value={me}>
+						<AccountContext.Provider value={{me, fallacies}}>
 							<Debate me={me} />
 						</AccountContext.Provider>
 					</ReactFlowProvider>

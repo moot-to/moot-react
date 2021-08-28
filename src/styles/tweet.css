@@ -26,6 +26,10 @@ body {
 	border: 4px solid #2f7af4;
 	border-radius: 15px;
 }
+.tweet-container.tweet-type-3{
+	border: 4px solid #E88300;
+	border-radius: 15px;
+}
 .tweet {
   border: 1px solid #e1e8ed;
   position: relative;
@@ -41,8 +45,13 @@ body {
 }
 .node-type-n .tweet-reply{
   width: 420px;
+	z-index: 10;
 }
 
+.tweet-container.fallacy-exist, .fallacy-exist .tweet {
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
 .tweet:hover {
   border-color: #ccd6dd;
 }

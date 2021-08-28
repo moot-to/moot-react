@@ -20,7 +20,7 @@ const getTree = (id) => {
 }
 
 const sendTweet = (params) => {
-	const url = `${BASE_URL}/tweet?status=${btoa(unescape(encodeURIComponent(params.text)))}&repliedTo=${params.to}&type=${params.type}`
+	const url = `${BASE_URL}/tweet?status=${btoa(unescape(encodeURIComponent(params.text)))}&repliedTo=${params.to}&type=${params.type}&fallacyId=${params.fallacyId}`
 	return fetch(url, { credentials: 'include' }).then(res => res.json())
 }
 
@@ -36,6 +36,11 @@ const dislikeTweet = (id) => {
 
 const randomMoot = (id) => {
 	const url = `${BASE_URL}/random`
+	return fetch(url, { credentials: 'include' }).then(res => res.json())
+}
+
+const getFallacies = (id) => {
+	const url = `${BASE_URL}/fallacies`
 	return fetch(url, { credentials: 'include' }).then(res => res.json())
 }
 
@@ -55,5 +60,6 @@ export default {
 	likeTweet,
 	dislikeTweet,
 	randomMoot,
+	getFallacies,
 	logout
 };
