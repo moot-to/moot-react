@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/tweet.css';
 import ContentLoader from 'react-content-loader'
 import { Link } from 'react-router-dom'
+import Helmet from 'react-helmet'
 
 const Tweet = ({like, dislike, reply, loading, status, className}) => {
 	if(loading){

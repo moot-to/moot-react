@@ -14,6 +14,11 @@ const getStatus = (id) => {
 		.then(res => res.json())
 }
 
+const getUUIDStatus = (id) => {
+	return fetch(`${BASE_URL}/uuid-status/${id}`, { credentials: 'include' })
+		.then(res => res.json())
+}
+
 const getTree = (id) => {
 	return fetch(`${BASE_URL}/tree/${id}`, { credentials: 'include' })
 		.then(res => res.json())
@@ -21,6 +26,11 @@ const getTree = (id) => {
 
 const sendTweet = (params) => {
 	const url = `${BASE_URL}/tweet?status=${btoa(unescape(encodeURIComponent(params.text)))}&repliedTo=${params.to}&type=${params.type}&fallacyId=${params.fallacyId}`
+	return fetch(url, { credentials: 'include' }).then(res => res.json())
+}
+
+const sendMoot = (params) => {
+	const url = `${BASE_URL}/moot?status=${btoa(unescape(encodeURIComponent(params.text)))}`
 	return fetch(url, { credentials: 'include' }).then(res => res.json())
 }
 
@@ -51,15 +61,24 @@ const logout = () => {
 		.then(res => window.location.reload())
 }
 
+const mainStatuses = () => {
+	const url = `${BASE_URL}/mainStatuses`
+	return fetch(url, { credentials: 'include' })
+		.then(res => res.json())
+}
+
 export default {
 	BASE_URL,
 	getMe,
 	getStatus,
+	getUUIDStatus,
 	getTree,
 	sendTweet,
+	sendMoot,
 	likeTweet,
 	dislikeTweet,
 	randomMoot,
 	getFallacies,
-	logout
+	logout,
+	mainStatuses
 };

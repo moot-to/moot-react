@@ -4,11 +4,11 @@ import { ReactFlowProvider } from 'react-flow-renderer';
 
 import API from './utils/api'
 import { BrowserRouter, Route } from 'react-router-dom';
-import { Home, Debate } from './components'
+import { Home, Debate, RouteDebate } from './components'
 
 const AccountContext = React.createContext(null);
 const App = () => {
-	const [me, setMe] = useState()
+	const [me, setMe] = useState(null)
 	const [fallacies, setFallacies] = useState()
 
 	useEffect(() => {
@@ -31,9 +31,9 @@ const App = () => {
 					{ me && me.screen_name ? <span>{me.screen_name} ― <span style={{cursor: "pointer"}} onClick={API.logout}>çıkış yap</span></span> : <a href={`${API.BASE_URL}/sessions/connect`}>giriş yap</a>  }
 				</div>
 			</header>
-
 			<BrowserRouter>
-				<Route exact path="/"> <Home /> </Route>	
+				<Route exact path="/"> <Home me={me} /> </Route>	
+				<Route path="/r/:id"> <RouteDebate /> </Route>	
 				<Route path="/:id">
 					<ReactFlowProvider>
 						<AccountContext.Provider value={{me, fallacies}}>
