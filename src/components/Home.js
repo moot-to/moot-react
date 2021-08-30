@@ -10,12 +10,13 @@ const Home = (props) => {
 		API.mainStatuses().then(setStatuses)
 	}, []);
 
+
 	return <div className="home">
 		<div className="last-moots">
-			<div className="filters">
+			{/*<div className="filters">
 				<span className="active">en yeniler</span>
 				<span>en iyiler</span>
-			</div>
+			</div>*/}
 			{statuses.map((status, key) => <TweetPreview key={key} status={status} />)}
 		</div>
 		<div className="introduction">

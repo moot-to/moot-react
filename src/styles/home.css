@@ -1,0 +1,81 @@
+.home{
+	display: flex;
+	flex-direction: row;
+}
+
+.home .last-moots{
+	margin: 60px auto;
+	display: flex;
+	flex: 1;
+	width: 90%;
+}
+
+.home .last-moots .filters{
+	width: 90%;
+	margin: 1% 5%;
+	display: flex;
+}
+
+.home .last-moots .filters span{
+	flex: 1;
+	text-align: center;
+}
+
+.home .introduction{
+	flex: 1;
+	background-color: #ddd;
+	min-height: 100vh;
+	padding-top: 60px;
+}
+
+.home .introduction pre{
+	white-space: break-spaces;	
+}
+
+.home .introduction .inner{
+	margin: 5%;
+}
+
+#twitter-button{
+	padding: 5px 10px;
+}
+
+.btn-twitter {
+	color: #fff;
+	background-color: #55acee;
+	border-color: rgba(0,0,0,0.2);
+}
+
+.btn-social {
+	position: relative;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.btn {
+	margin-bottom: 0;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	touch-action: manipulation;
+	cursor: pointer;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	border-left-color: transparent;
+	border-radius: 4px;
+}
+
+@media (max-width: 800px) {
+	.home{
+		flex-direction: column;
+	}
+	.home .introduction{
+		padding: 5%;
+	}
+}

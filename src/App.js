@@ -25,10 +25,17 @@ const App = () => {
   return (
 		<div className="App">
 			<header>
-				<div className="logo">moot.to </div>
-				<div className="random" onClick={getRandom}>random</div>
+				<div className="logo"><a href="/">moot.to</a></div>
 				<div id="signin">
-					{ me && me.screen_name ? <span>{me.screen_name} ― <span style={{cursor: "pointer"}} onClick={API.logout}>çıkış yap</span></span> : <a href={`${API.BASE_URL}/sessions/connect`}>giriş yap</a>  }
+					{ me && me.screen_name 
+					? <div className="profile">
+						<div className="picture"><img src={me.profile_image_url_https} /></div>
+						<div className="username">{me.screen_name}</div>
+						<div class="dropdown-content">
+							<a onClick={API.logout}>çıkış yap</a>
+						</div>
+					</div>
+					: <a href={`${API.BASE_URL}/sessions/connect`}>giriş yap</a>  }
 				</div>
 			</header>
 			<BrowserRouter>
