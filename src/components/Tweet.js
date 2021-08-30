@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/tweet.css';
 import ContentLoader from 'react-content-loader'
 import { Link } from 'react-router-dom'
-import Helmet from 'react-helmet'
 
 const Tweet = ({like, dislike, reply, loading, status, className}) => {
 	if(loading){
@@ -34,15 +33,13 @@ const Tweet = ({like, dislike, reply, loading, status, className}) => {
 	
 	const mentioned_usernames = status && status.text ? status.text.match(username_regex) : []
 
+	if(status && status.entities && status.entities.urls && Array.isArray(status.entities.urls)){
+		status.entities.urls.map(url => {
+			status.text = status.text.replace(url.url, "").trim("")
+		})
+	}
+
 	return <div className={`tweet-container ${className}`}>
-		<Helmet>
-			<meta name="twitter:card" content="summary_large_image" />
-			<meta name="twitter:site" content="@moot_to" />
-			<meta name="twitter:creator" content="@moot_to" />
-			<meta name="twitter:title" content={status.user.screen_name} />
-			<meta name="twitter:description" content={status.text} />
-			<meta name="twitter:image" content="http://graphics8.nytimes.com/images/2012/02/19/us/19whitney-span/19whitney-span-articleLarge.jpg" />
-		</Helmet>
 		<a href={`https://twitter.com/${status.user.screen_name}/status/${status.id_str}`} target="_blank">
 			<div className="tweet">
 				<div className="tweet-head">

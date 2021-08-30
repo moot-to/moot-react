@@ -26,8 +26,7 @@ const Home = (props) => {
 				</pre>
 
 				<p>Moot, <i>twitter</i> tabanlı argüman haritalama ve tartışma platformudur. </p>
-
-				{ props.me === null
+				{ props.me && Boolean(props.me.error)
 					? <a id="twitter-button" class="btn btn-social btn-twitter" href={`${API.BASE_URL}/sessions/connect`}>twitter ile giriş yap</a>
 					: <TweetCreate />
 				}
